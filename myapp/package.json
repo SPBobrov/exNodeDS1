@@ -1,0 +1,13 @@
+{
+  "name": "greeting-app",
+  "version": "1.0.0",
+  "description": "Простое приветственное приложение",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["nodejs", "http", "greeting"],
+  "author": "Your Name",
+  "license": "MIT"
+}
