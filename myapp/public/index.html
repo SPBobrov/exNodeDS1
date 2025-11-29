@@ -81,6 +81,53 @@
         <div id="result" class="result"></div>
     </div>
 
+    <!-- Добавьте после основной формы -->
+<div class="form-group" style="margin-top: 30px; border-top: 1px solid #ddd; padding-top: 20px;">
+    <h3>Добавить новое приветствие</h3>
+    <input type="text" id="newGreetingInput" placeholder="Введите новое приветствие..." style="margin-bottom: 10px;">
+    <button onclick="addGreeting()" style="background-color: #28a745;">Добавить приветствие</button>
+    <div id="addResult" style="margin-top: 10px;"></div>
+</div>
+
+<script>
+    function addGreeting() {
+        const input = document.getElementById('newGreetingInput');
+        const resultDiv = document.getElementById('addResult');
+        const greeting = input.value.trim();
+        
+        if (!greeting) {
+            showAddResult('Пожалуйста, введите приветствие!', true);
+            return;
+        }
+        
+        fetch('/api/greetings', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ greeting: greeting })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                showAddResult('Приветствие успешно добавлено!', false);
+                input.value = '';
+            } else {
+                showAddResult('Ошибка при добавлении!', true);
+            }
+        })
+        .catch(error => {
+            showAddResult('Ошибка сети!', true);
+        });
+    }
+    
+    function showAddResult(message, isError) {
+        const resultDiv = document.getElementById('addResult');
+        resultDiv.textContent = message;
+        resultDiv.style.color = isError ? '#dc3545' : '#28a745';
+    }
+</script>
+
     <script>
         function getGreeting() {
             const nameInput = document.getElementById('nameInput');
