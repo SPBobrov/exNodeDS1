@@ -5,6 +5,7 @@ const url = require('url');
 const sqlite3 = require('sqlite3').verbose();
 
 // Создаем и подключаем базу данных
+// изменение из vsc
 const db = new sqlite3.Database('./greetings.db');
 
 // Инициализация базы данных
